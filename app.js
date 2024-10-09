@@ -65,9 +65,6 @@ const sessionOptions = {
     },
 }
 
-// app.get("/",(req,res)=>{
-//     res.send("Hi,I am root") ; 
-// });
 
 
 app.use(session(sessionOptions)) ;
@@ -96,9 +93,15 @@ app.get("/demouser",async (req,res)=>{
    res.send(newuser);
 });
 
+app.get("/",(req,res)=>{
+    res.redirect("/listings") ; 
+});
+
+
 app.use("/",reviewsRouter) ;
 app.use("/",listingsRouter);
 app.use("/",userRouter);
+
 
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page not found!")) ; 
